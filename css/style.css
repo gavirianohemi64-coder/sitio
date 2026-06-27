@@ -1,24 +1,199 @@
-/* Reinicio básico para evitar márgenes extraños */
+/* ==========================================================================
+   1. RESET Y ESTILOS BASE (Preservado)
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Estilos para el cuerpo de la página */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: #f7fafc;
+}
+
+/* ==========================================================================
+   2. MENÚ DE NAVEGACIÓN (Preservado)
+   ========================================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    
+    /* Efecto translúcido (Glassmorphism) */
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.logo a {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a202c;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a5568;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 20px;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #000000;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.btn-action {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 2px solid #7c4dff;
+    color: #7c4dff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+    background-color: #7c4dff;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+}
+
+/* ==========================================================================
+   3. NUEVA SECCIÓN: HERO
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
+    padding: 0 20px;
+    
+    /* Configuración de la imagen de fondo (Sube un nivel '../' para salir de la carpeta css) */
+    background: url('../Captura de pantalla 2026-06-27 112410.jpg') no-repeat center center/cover;
 }
 
-/* Estilo del título */
-h1 {
-    font-size: 2.5rem;
-    color: #2c3e50;
+/* Capa opcional por si deseas oscurecer un poco la imagen para mejorar la lectura del texto */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05); /* Tono muy sutil para no perder la estética clara */
+    z-index: 1;
+}
+
+/* Contenedor del texto del Hero */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Se posiciona por encima del fondo */
+    max-width: 800px;
+    color: #1a202c; /* Color oscuro que contrasta con el cielo claro del paisaje */
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+/* Botón principal del Hero */
+.btn-primary {
+    display: inline-block;
+    padding: 14px 35px;
+    background-color: #1a202c;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+    background-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Animación sutil de entrada para el contenido */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   4. RESPONSIVE / ADAPTACIÓN MÓVIL
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem; /* Texto más pequeño en móviles */
+    }
+
+    .hero-content p {
+        font-size: 1.05rem;
+    }
 }
